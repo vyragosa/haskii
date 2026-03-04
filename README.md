@@ -13,7 +13,7 @@ stack build
 ## Использование
 
 ```
-stack exec hascii -- IMAGE [--width INT] [--invert] [--color] [--output FILE]
+stack exec hascii -- IMAGE [--width INT] [--invert] [--dense]
 ```
 
 ### Параметры
@@ -23,8 +23,7 @@ stack exec hascii -- IMAGE [--width INT] [--invert] [--color] [--output FILE]
 | `IMAGE`         | Путь к изображению                           | (обязателен) |
 | `--width, -w`   | Ширина вывода в символах                     | `80`         |
 | `--invert, -i`  | Инвертировать яркость (светлое ↔ тёмное)     | выключено    |
-| `--color, -c`   | Вывод с ANSI-цветами                         | выключено    |
-| `--output, -o`  | Сохранить результат в файл                   | stdout       |
+| `--dense, -d`   | Использовать плотную (расширенную) палитру   | выключено    |
 
 ### Примеры
 
@@ -35,11 +34,8 @@ stack exec hascii -- photo.png
 # Широкий вывод с инвертированием
 stack exec hascii -- photo.png --width 120 --invert
 
-# Сохранить в файл
-stack exec hascii -- photo.png --output result.txt
-
-# Цветной вывод в терминале
-stack exec hascii -- photo.png --color
+# Использование плотной палитры для большей детализации
+stack exec hascii -- photo.png --dense
 ```
 
 ## Лицензия
