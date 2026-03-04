@@ -19,7 +19,6 @@ data Options = Options
   { optInput  :: FilePath   -- ^ Путь к входному изображению
   , optWidth  :: Int        -- ^ Ширина вывода в символах
   , optInvert :: Bool       -- ^ Инвертировать яркость
-  , optDense  :: Bool       -- ^ Использовать плотную (расширенную) палитру
   } deriving (Show)
 
 -- ---------------------------------------------------------------------------
@@ -94,11 +93,7 @@ imageToAscii opts = do
     Right dyn -> do
       let rgb     = toRGB8 dyn
           scaled  = scaleImage rgb (optWidth opts)
-<<<<<<< HEAD
-          palette = if optDense opts then densePalette else defaultPalette
-=======
           palette = defaultPalette
->>>>>>> 0c41a29 (Fix compile error and add sample image)
           rows    = [ [ pixelToChar palette (optInvert opts)
                           (luminance (pixelAt scaled x y))
                       | x <- [0 .. imageWidth scaled - 1] ]
