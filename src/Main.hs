@@ -1,8 +1,9 @@
--- | Точка входа приложения hascii — CLI-заготовка.
+-- | Точка входа приложения hascii.
 module Main (main) where
 
-import Ascii (Options (..), defaultPalette)
+import Ascii (Options (..), imageToAscii)
 import Options.Applicative
+import System.Exit (exitFailure)
 
 -- | Парсер аргументов командной строки.
 optionsParser :: Parser Options
@@ -31,9 +32,8 @@ programInfo = info (optionsParser <**> helper)
 
 main :: IO ()
 main = do
-  opts <- execParser programInfo
-  putStrLn $ "hascii: входной файл = " ++ optInput opts
-  putStrLn $ "        ширина       = " ++ show (optWidth opts)
-  putStrLn $ "        инверт       = " ++ show (optInvert opts)
-  putStrLn $ "        палитра      = " ++ defaultPalette
-  putStrLn "(логика преобразования будет добавлена в следующем коммите)"
+  opts   <- execParser programInfo
+  result <- imageToAscii opts
+  case result of
+    Left  err -> putStrLn err >> exitFailure
+    Right art -> putStr art
