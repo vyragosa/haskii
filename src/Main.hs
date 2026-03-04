@@ -22,6 +22,10 @@ optionsParser = Options
         ( long "invert"
        <> short 'i'
        <> help "Инвертировать яркость (светлое ↔ тёмное)" )
+  <*> switch
+        ( long "dense"
+       <> short 'd'
+       <> help "Использовать плотную (расширенную) палитру" )
 
 -- | Информация о программе для --help.
 programInfo :: ParserInfo Options
